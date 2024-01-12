@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import { ArrowLeft } from "./icons/ArrowLeft";
 import { ArrowRight } from "./icons/ArrowRight";
 export const BaseButton = ({
@@ -6,23 +6,23 @@ export const BaseButton = ({
   label,
   onPress,
   upperCase,
+  flex1,
 }: {
   icon?: "left" | "right";
   label?: string;
   onPress?: () => void;
   upperCase?: boolean;
+  flex1?: boolean;
 }) => {
   return (
-    <Pressable onPress={onPress}>
-      <View style={[styles.button, !icon && styles.noIcon]}>
-        {label && (
-          <Text style={[styles.text, upperCase && styles.uppercase]}>
-            {label}
-          </Text>
-        )}
-        {icon === "left" && <ArrowLeft />}
-        {icon === "right" && <ArrowRight />}
-      </View>
+    <Pressable style={[styles.button, flex1 && styles.flex1]} onPress={onPress}>
+      {label && (
+        <Text style={[styles.text, upperCase && styles.uppercase]}>
+          {label}
+        </Text>
+      )}
+      {icon === "left" && <ArrowLeft />}
+      {icon === "right" && <ArrowRight />}
     </Pressable>
   );
 };
@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
   button: {
     borderColor: "#fff",
     borderWidth: 1,
-    padding: 8,
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     gap: 16,
+    height: 68,
   },
   text: {
     color: "#fff",
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   uppercase: {
     textTransform: "uppercase",
   },
-  noIcon: {
-    padding: 16,
+  flex1: {
+    flex: 1,
   },
 });

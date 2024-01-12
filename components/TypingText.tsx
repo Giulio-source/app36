@@ -8,47 +8,28 @@ export default function TypingText({
   text: string;
   type: "cover" | "title" | "text";
 }) {
-  const [innerText, setInnerText] = useState("");
+  const [visibleIndex, setVisibleIndex] = useState<number>(-1);
   const [blinkingColor, setBlinkingColor] = useState("transparent");
 
-  const index = useRef(0);
-  const typingTimer = useRef<any>(-1);
-  const blinkingCursorTimer = useRef<any>(-1);
+  const typingTimer = useRef<NodeJS.Timeout | -1>(-1);
   function typingAnimation() {
     clearTimeout(typingTimer.current);
-
     typingTimer.current = -1;
 
-    if (index.current < text.length) {
-      setInnerText((prev) => prev + text.charAt(index.current));
-
-      index.current++;
+    if (visibleIndex < text.length) {
+      setVisibleIndex((prev) => (prev += 1));
 
       typingTimer.current = setTimeout(() => {
         typingAnimation();
-      }, 50);
+      }, 40);
     }
-  }
-
-  function blinkingCursorAnimation() {
-    blinkingCursorTimer.current = setInterval(() => {
-      if (blinkingColor == "transparent") {
-        setBlinkingColor("white");
-      } else {
-        setBlinkingColor("transparent");
-      }
-    }, 190);
   }
 
   useEffect(() => {
     typingAnimation();
-    blinkingCursorAnimation();
 
     return () => {
       clearTimeout(typingTimer.current);
-      typingTimer.current = -1;
-      clearInterval(blinkingCursorTimer.current);
-      blinkingCursorTimer.current = -1;
     };
   }, []);
 
@@ -61,17 +42,17 @@ export default function TypingText({
           type === "title" && styles.title,
         ]}
       >
-        {innerText}
-        {innerText !== text && (
+        {[...text].map((char, index) => (
           <Text
-            style={{
-              color: blinkingColor,
-              fontWeight: "100",
-            }}
+            key={index}
+            style={[
+              styles.letter,
+              { color: index <= visibleIndex ? "#fff" : "transparent" },
+            ]}
           >
-            |
+            {char}
           </Text>
-        )}
+        ))}
       </Text>
     </View>
   );
@@ -85,14 +66,17 @@ const styles = StyleSheet.create({
     fontFamily: "JosefinSans_400Regular",
   },
   cover: {
-    fontSize: 48,
+    fontSize: 52,
     letterSpacing: -2,
-    lineHeight: 48,
+    lineHeight: 52,
     fontFamily: "JosefinSans_700Bold",
   },
   title: {
     fontSize: 32,
     lineHeight: 36,
     marginBottom: 16,
+  },
+  letter: {
+    textTransform: "none",
   },
 });

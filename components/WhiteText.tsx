@@ -1,4 +1,5 @@
 import { StyleSheet, Text } from "react-native";
+import { Colors } from "../commons/theme";
 
 export const WhiteText = ({
   children,
@@ -18,7 +19,7 @@ export const WhiteText = ({
 
 const styles = StyleSheet.create({
   white: {
-    color: "#dddddd",
+    color: Colors.white,
     marginBottom: 16,
     fontFamily: "JosefinSans_400Regular",
   },

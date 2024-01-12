@@ -29,9 +29,7 @@ export const LanguagePicker = ({ onNext }: { onNext: () => void }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     gap: 32,
     width: "100%",
-    justifyContent: "center",
   },
 });
