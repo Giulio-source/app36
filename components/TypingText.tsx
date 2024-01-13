@@ -9,7 +9,6 @@ export default function TypingText({
   type: "cover" | "title" | "text";
 }) {
   const [visibleIndex, setVisibleIndex] = useState<number>(-1);
-  const [blinkingColor, setBlinkingColor] = useState("transparent");
 
   const typingTimer = useRef<NodeJS.Timeout | -1>(-1);
   function typingAnimation() {
@@ -21,7 +20,7 @@ export default function TypingText({
 
       typingTimer.current = setTimeout(() => {
         typingAnimation();
-      }, 40);
+      }, 35);
     }
   }
 
