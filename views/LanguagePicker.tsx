@@ -28,13 +28,28 @@ export const LanguagePicker = ({ onNext }: { onNext: () => void }) => {
         onPress={() => handleOnClick("es")}
         upperCase
       />
+      <BaseButton
+        label="Français"
+        onPress={() => handleOnClick("fr")}
+        upperCase
+      />
+      <BaseButton
+        label="Deutsch"
+        onPress={() => handleOnClick("de")}
+        upperCase
+      />
+      <BaseButton
+        label="Português"
+        onPress={() => handleOnClick("pt")}
+        upperCase
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    gap: 32,
+    gap: 16,
     width: "100%",
   },
 });
