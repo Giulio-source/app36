@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Animated from "react-native-reanimated";
 import { BaseButton } from "../components/BaseButton";
 import TypingText from "../components/TypingText";
 import { AppContext } from "../context/AppContext";
@@ -19,7 +20,7 @@ export const Question = ({
   const { lang } = useContext(AppContext);
 
   return (
-    <View style={styles.container}>
+    <Animated.View style={styles.container}>
       <View style={styles.question}>
         <TypingText
           type="question"
@@ -34,7 +35,7 @@ export const Question = ({
         <BaseButton icon="left" onPress={onPrev} flex1 />
         <BaseButton icon="right" onPress={onNext} flex1 />
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     marginTop: 32,
-    gap: 24,
+    gap: 16,
     flexDirection: "row",
     height: 68,
     width: "100%",

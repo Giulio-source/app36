@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     marginTop: 32,
-    display: "flex",
-    gap: 32,
+    gap: 16,
   },
 });

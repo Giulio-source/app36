@@ -23,6 +23,11 @@ export const LanguagePicker = ({ onNext }: { onNext: () => void }) => {
         onPress={() => handleOnClick("it")}
         upperCase
       />
+      <BaseButton
+        label="Español"
+        onPress={() => handleOnClick("es")}
+        upperCase
+      />
     </View>
   );
 };

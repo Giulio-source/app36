@@ -10,7 +10,6 @@ import Animated, { useSharedValue, withTiming } from "react-native-reanimated";
 import { Colors } from "../commons/theme";
 import { shuffleNumbers } from "../commons/utils";
 import { AppContext } from "../context/AppContext";
-import { questions } from "../data/questionsData";
 import { Cover } from "./Cover";
 import { EndGame } from "./EndGame";
 import { Instructions } from "./Instructions";
@@ -30,7 +29,7 @@ export const Main = () => {
   const [step, setStep] = useState<StepType>("cover");
   const [debouncedStep, setDebouncedStep] = useState<StepType>("cover");
   const [index, setIndex] = useState(0);
-  const [message, setMessage] = useState("");
+  const [debouncedIndex, setDebouncedIndex] = useState(0);
   const [order, setOrder] = useState<"set" | "random" | undefined>("set");
   const [questionsOrder, setQuestionsOrder] = useState<number[]>();
 
@@ -80,26 +79,29 @@ export const Main = () => {
   }, [order]);
 
   useEffect(() => {
-    if (index !== undefined && lang && step === "question" && questionsOrder) {
-      if (index < 36) {
-        const nextMessage = questions[questionsOrder[index]][lang];
-        setMessage(nextMessage);
-      }
-    }
-  }, [index, lang, step, questionsOrder]);
-
-  useEffect(() => {
     onChangeExiting(true);
     appOpacity.value = withTiming(0, { duration: 1500 });
+  }, [step, index]);
+
+  useEffect(() => {
     setTimeout(() => {
-      onChangeExiting(false);
       setDebouncedStep(step);
     }, 1500);
   }, [step]);
 
   useEffect(() => {
+    setTimeout(() => {
+      onChangeExiting(false);
+    }, 1500);
+    setTimeout(() => {
+      setDebouncedIndex(index);
+    }, 2500);
+  }, [index]);
+
+  useEffect(() => {
+    onChangeExiting(false);
     appOpacity.value = withTiming(1, { duration: 1500 });
-  }, [debouncedStep]);
+  }, [debouncedStep, debouncedIndex]);
 
   if (!fontsLoaded && !fontError) {
     return null;
@@ -131,8 +133,8 @@ export const Main = () => {
         )}
         {debouncedStep === "question" && (
           <Question
-            questionIndex={questionsOrder && questionsOrder[index]}
-            questionNumber={index + 1}
+            questionIndex={questionsOrder && questionsOrder[debouncedIndex]}
+            questionNumber={debouncedIndex + 1}
             onNext={onNextQuestion}
             onPrev={onPrevQuestion}
           />
@@ -153,6 +155,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 16,
-    paddingBottom: 120,
+    paddingBottom: 80,
   },
 });

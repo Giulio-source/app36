@@ -34,9 +34,11 @@ export const FadeInOut = ({
   useEffect(() => {
     if (exiting) {
       offsetY.value = withDelay(
-        random(0, 500),
-        withTiming(random(0, 50), { duration: 1500 })
+        random(0, 400),
+        withTiming(random(20, 50), { duration: 1500 })
       );
+    } else {
+      offsetY.value = withTiming(0, { duration: 2500 });
     }
   }, [exiting]);
 

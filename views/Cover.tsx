@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   indexWrapper: {
     position: "absolute",
     zIndex: -1,
-    width: "100%",
+    width: "150%",
   },
   indexNumber: {
     color: "#303030",
