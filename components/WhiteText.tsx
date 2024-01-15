@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
     color: Colors.white,
     marginBottom: 16,
     fontFamily: "JosefinSans_400Regular",
+    width: "100%",
+    textAlign: "center",
   },
   p: {
     fontSize: 18,

@@ -1,3 +1,4 @@
+import { GreatVibes_400Regular } from "@expo-google-fonts/great-vibes";
 import {
   JosefinSans_400Regular,
   JosefinSans_700Bold,
@@ -41,21 +42,22 @@ export const Main = () => {
   let [fontsLoaded, fontError] = useFonts({
     JosefinSans_400Regular,
     JosefinSans_700Bold,
+    GreatVibes_400Regular,
   });
 
   function onNextQuestion() {
-    console.log("on next", index);
-    setIndex((prev) => (prev += 1));
+    if (index < 35) {
+      setIndex((prev) => (prev += 1));
+    } else {
+      setStep("end-game");
+    }
   }
 
   function onPrevQuestion() {
-    console.log("on prev");
-
     if (index === 0) {
       setStep("language");
       setOrder(undefined);
       setQuestionsOrder(undefined);
-      onChangeLang("en");
       return;
     }
     setIndex((prev) => (prev -= 1));
@@ -79,9 +81,7 @@ export const Main = () => {
 
   useEffect(() => {
     if (index !== undefined && lang && step === "question" && questionsOrder) {
-      if (index >= 36) {
-        setStep("end-game");
-      } else {
+      if (index < 36) {
         const nextMessage = questions[questionsOrder[index]][lang];
         setMessage(nextMessage);
       }
