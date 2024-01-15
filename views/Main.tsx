@@ -92,10 +92,10 @@ export const Main = () => {
   useEffect(() => {
     setTimeout(() => {
       onChangeExiting(false);
-    }, 1500);
+    }, 1200);
     setTimeout(() => {
       setDebouncedIndex(index);
-    }, 2500);
+    }, 1800);
   }, [index]);
 
   useEffect(() => {
