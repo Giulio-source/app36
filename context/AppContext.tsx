@@ -1,6 +1,16 @@
 import { createContext, useState } from "react";
 
 export type LanguageType = "en" | "it" | "es" | "fr" | "de" | "pt";
+
+export const LANGUAGE_HANDLER: { [key in LanguageType]: string } = {
+  en: "English",
+  it: "Italiano",
+  es: "Español",
+  fr: "Français",
+  de: "Deutsch",
+  pt: "Português",
+};
+
 type ContextValueType = {
   lang: LanguageType;
   onChangeLang: (lang: LanguageType) => void;

@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, Text } from "react-native";
+import { Colors } from "../commons/theme";
 import { FadeInOut } from "./FadeInOut";
 import { ArrowLeft } from "./icons/ArrowLeft";
 import { ArrowRight } from "./icons/ArrowRight";
@@ -8,15 +9,26 @@ export const BaseButton = ({
   onPress,
   upperCase,
   flex1,
+  fadeDelay,
+  fadeDuration,
+  fadeOffset,
 }: {
   icon?: "left" | "right";
   label?: string;
   onPress?: () => void;
   upperCase?: boolean;
   flex1?: boolean;
+  fadeDelay?: number;
+  fadeDuration?: number;
+  fadeOffset?: number;
 }) => {
   return (
-    <FadeInOut style={[flex1 && styles.flex1]}>
+    <FadeInOut
+      style={[flex1 && styles.flex1]}
+      fadeDelay={fadeDelay}
+      fadeDuration={fadeDuration}
+      fadeOffset={fadeOffset}
+    >
       <Pressable
         style={({ pressed }) => [
           styles.button,
@@ -39,17 +51,17 @@ export const BaseButton = ({
 
 const styles = StyleSheet.create({
   button: {
-    borderColor: "#fff",
+    borderColor: Colors.white,
     borderWidth: 1,
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     gap: 16,
-    height: 68,
+    height: 64,
   },
   text: {
-    color: "#fff",
+    color: Colors.white,
     fontSize: 20,
     fontFamily: "JosefinSans_400Regular",
   },

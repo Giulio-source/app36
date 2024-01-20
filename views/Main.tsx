@@ -26,8 +26,8 @@ type StepType =
   | "end-game";
 
 export const Main = () => {
-  const [step, setStep] = useState<StepType>("cover");
-  const [debouncedStep, setDebouncedStep] = useState<StepType>("cover");
+  const [step, setStep] = useState<StepType>("language");
+  const [debouncedStep, setDebouncedStep] = useState<StepType>("language");
   const [index, setIndex] = useState(0);
   const [debouncedIndex, setDebouncedIndex] = useState(0);
   const [order, setOrder] = useState<"set" | "random" | undefined>("set");
@@ -56,7 +56,6 @@ export const Main = () => {
     if (index === 0) {
       setStep("language");
       setOrder(undefined);
-      setQuestionsOrder(undefined);
       return;
     }
     setIndex((prev) => (prev -= 1));
@@ -155,6 +154,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 16,
-    paddingBottom: 80,
+    paddingBottom: 64,
   },
 });

@@ -12,24 +12,23 @@ import { AppContext } from "../context/AppContext";
 export const FadeInOut = ({
   children,
   style,
+  fadeDelay,
+  fadeDuration,
+  fadeOffset,
 }: {
   children: React.ReactNode;
   style: StyleProp<any>;
+  fadeDelay?: number;
+  fadeDuration?: number;
+  fadeOffset?: number;
 }) => {
   const { exiting } = useContext(AppContext);
 
-  const offsetY = useSharedValue(random(-50, 0));
+  const offsetY = useSharedValue(fadeOffset || random(-50, 0));
 
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [{ translateY: offsetY.value }],
   }));
-
-  useEffect(() => {
-    offsetY.value = withDelay(
-      random(0, 500),
-      withTiming(0, { duration: 1500 })
-    );
-  }, []);
 
   useEffect(() => {
     if (exiting) {
@@ -38,7 +37,7 @@ export const FadeInOut = ({
         withTiming(random(20, 50), { duration: 1500 })
       );
     } else {
-      offsetY.value = withTiming(0, { duration: 2500 });
+      offsetY.value = withTiming(0, { duration: fadeDuration || 2500 });
     }
   }, [exiting]);
 

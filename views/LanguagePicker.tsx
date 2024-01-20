@@ -1,7 +1,11 @@
 import { useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import { BaseButton } from "../components/BaseButton";
-import { AppContext, LanguageType } from "../context/AppContext";
+import {
+  AppContext,
+  LANGUAGE_HANDLER,
+  LanguageType,
+} from "../context/AppContext";
 
 export const LanguagePicker = ({ onNext }: { onNext: () => void }) => {
   const { onChangeLang } = useContext(AppContext);
@@ -13,36 +17,17 @@ export const LanguagePicker = ({ onNext }: { onNext: () => void }) => {
 
   return (
     <View style={styles.container}>
-      <BaseButton
-        label="English"
-        onPress={() => handleOnClick("en")}
-        upperCase
-      />
-      <BaseButton
-        label="Italiano"
-        onPress={() => handleOnClick("it")}
-        upperCase
-      />
-      <BaseButton
-        label="Español"
-        onPress={() => handleOnClick("es")}
-        upperCase
-      />
-      <BaseButton
-        label="Français"
-        onPress={() => handleOnClick("fr")}
-        upperCase
-      />
-      <BaseButton
-        label="Deutsch"
-        onPress={() => handleOnClick("de")}
-        upperCase
-      />
-      <BaseButton
-        label="Português"
-        onPress={() => handleOnClick("pt")}
-        upperCase
-      />
+      {Object.entries(LANGUAGE_HANDLER).map(([key, value], index, arr) => (
+        <BaseButton
+          key={key}
+          label={value}
+          onPress={() => handleOnClick(key as LanguageType)}
+          upperCase
+          // fadeDelay={(arr.length / (index + 1)) * 80}
+          // fadeOffset={-50}
+          // fadeDuration={1500}
+        />
+      ))}
     </View>
   );
 };
