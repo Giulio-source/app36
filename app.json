@@ -2,7 +2,7 @@
   "expo": {
     "name": "36 Questions",
     "slug": "app36",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -10,12 +10,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.fuykui.app36"
+      "bundleIdentifier": "com.fuykui.app36",
+      "buildNumber": "2Ø"
     },
     "android": {
       "adaptiveIcon": {
