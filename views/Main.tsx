@@ -26,8 +26,8 @@ type StepType =
   | "end-game";
 
 export const Main = () => {
-  const [step, setStep] = useState<StepType>("language");
-  const [debouncedStep, setDebouncedStep] = useState<StepType>("language");
+  const [step, setStep] = useState<StepType>("cover");
+  const [debouncedStep, setDebouncedStep] = useState<StepType>("cover");
   const [index, setIndex] = useState(0);
   const [debouncedIndex, setDebouncedIndex] = useState(0);
   const [order, setOrder] = useState<"set" | "random" | undefined>("set");
