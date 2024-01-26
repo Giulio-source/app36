@@ -28,7 +28,7 @@ export default function TypingText({
         () => {
           typingAnimation();
         },
-        fast ? 800 / text.length : 35
+        fast ? 1000 / text.length : 35
       );
     }
   }
