@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.black,
+    alignItems: "center",
   },
   content: {
     flex: 1,
@@ -155,5 +156,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 16,
     paddingBottom: 64,
+    width: "100%",
+    maxWidth: 600,
   },
 });
